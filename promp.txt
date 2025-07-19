@@ -1,0 +1,19 @@
+帮我用python完成以下工作
+1. 有五个excel表格， 分别叫Aivres Bank Record_2025.05.23, EW_AP_2025.03 , EW_AR_2025.03, EW_AP_2025.04, EW_AR_2025.04
+2. 在Aivres Bank Record_2025.05.23的excel表中有各个月份的sheet， 名字格式叫2025.03， 2025.04， 以此类推
+3. 在EW_AP_2025的excel表中有不同的sheet， 使用名为record的sheet中的数据，若数据中出现负值， 则一律使用绝对值进行比较
+4. 读取Aivres Bank Record_2025.05.23的2025.03 sheet中的Debit列数据， 再读取EW_AP_2025.03 excel表格record sheet中的第6列数据，若数据中出现负值， 则一律使用绝对值进行比较
+5. 在读取到Aivres Bank Record_2025.05.23的2025.03 sheet中的Debit列数据中， 先判断对应行的Date列数据是否为空值， 如果是空， 则直接跳过， 无需记录
+6. 把步骤4中读取的两列数据进行一一对比， 对比条件如下：
+	a. 在Aivres Bank Record_2025.05.23中读取到的数据， 如果是空值， 则直接跳过， 无需记录。
+	b. 判断每一个在Aivres Bank Record_2025.05.23中的非空数据是否都存在EW_AP_2025.03 表格的record sheet 第6列中
+	c. 如果两表格数据匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在一个新的名为：EW_AP_2025.03_result.xlsx 的excel表的correct sheet中，若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+	c. 如果两表格数据不匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在EW_AP_2025.03_result.xlsx的excel表的incorrect sheet中, 若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+7. 继续读取Aivres Bank Record_2025.05.23的2025.03 sheet中的Credit列数据, 再读取EW_AR_2025.03 excel表格record sheet中的第7列数据，若数据中出现负值， 则一律使用绝对值进行比较
+8. 在读取到Aivres Bank Record_2025.05.23的2025.03 sheet中的Credit列数据中， 先判断对应行的Date列数据是否为空值， 如果是空， 则直接跳过， 无需记录
+	a. 在Aivres Bank Record_2025.05.23中读取到的数据， 如果是空值， 则直接跳过， 无需记录。
+	b. 判断每一个在Aivres Bank Record_2025.05.23中的非空数据是否都存在EW_AP_2025.03 表格的record sheet 第7列中
+	c. 如果两表格数据匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在一个新的名为：EW_AR_2025.03_result.xlsx 的excel表的correct sheet中，若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+	c. 如果两表格数据不匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在EW_AR_2025.03_result.xlsx的excel表的incorrect sheet中,若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+9. 同様操作， 作用在EW_AP_2025.04, EW_AR_2025.04这两个表格中， 结果报存在EW_AP_2025.04_result.xlsx， EW_AR_2025.04_result.xlsx两个表格中,若表格存在， 则覆盖写入， 若不存在， 则新建再写入。若数据中出现负值， 则一律使用绝对值进行比较
+10.若比较多数据中出现负值， 则一律使用绝对值进行比较。 如果处理的数据是非数值型的， 直接排除掉， 无需比较
