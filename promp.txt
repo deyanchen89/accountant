@@ -1,19 +1,40 @@
 帮我用python完成以下工作
-1. 有五个excel表格， 分别叫Aivres Bank Record_2025.05.23, EW_AP_2025.03 , EW_AR_2025.03, EW_AP_2025.04, EW_AR_2025.04
-2. 在Aivres Bank Record_2025.05.23的excel表中有各个月份的sheet， 名字格式叫2025.03， 2025.04， 以此类推
-3. 在EW_AP_2025的excel表中有不同的sheet， 使用名为record的sheet中的数据，若数据中出现负值， 则一律使用绝对值进行比较
-4. 读取Aivres Bank Record_2025.05.23的2025.03 sheet中的Debit列数据， 再读取EW_AP_2025.03 excel表格record sheet中的第6列数据，若数据中出现负值， 则一律使用绝对值进行比较
-5. 在读取到Aivres Bank Record_2025.05.23的2025.03 sheet中的Debit列数据中， 先判断对应行的Date列数据是否为空值， 如果是空， 则直接跳过， 无需记录
-6. 把步骤4中读取的两列数据进行一一对比， 对比条件如下：
-	a. 在Aivres Bank Record_2025.05.23中读取到的数据， 如果是空值， 则直接跳过， 无需记录。
-	b. 判断每一个在Aivres Bank Record_2025.05.23中的非空数据是否都存在EW_AP_2025.03 表格的record sheet 第6列中
-	c. 如果两表格数据匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在一个新的名为：EW_AP_2025.03_result.xlsx 的excel表的correct sheet中，若表格存在， 则覆盖写入， 若不存在， 则新建再写入
-	c. 如果两表格数据不匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在EW_AP_2025.03_result.xlsx的excel表的incorrect sheet中, 若表格存在， 则覆盖写入， 若不存在， 则新建再写入
-7. 继续读取Aivres Bank Record_2025.05.23的2025.03 sheet中的Credit列数据, 再读取EW_AR_2025.03 excel表格record sheet中的第7列数据，若数据中出现负值， 则一律使用绝对值进行比较
-8. 在读取到Aivres Bank Record_2025.05.23的2025.03 sheet中的Credit列数据中， 先判断对应行的Date列数据是否为空值， 如果是空， 则直接跳过， 无需记录
-	a. 在Aivres Bank Record_2025.05.23中读取到的数据， 如果是空值， 则直接跳过， 无需记录。
-	b. 判断每一个在Aivres Bank Record_2025.05.23中的非空数据是否都存在EW_AP_2025.03 表格的record sheet 第7列中
-	c. 如果两表格数据匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在一个新的名为：EW_AR_2025.03_result.xlsx 的excel表的correct sheet中，若表格存在， 则覆盖写入， 若不存在， 则新建再写入
-	c. 如果两表格数据不匹配， 则把Aivres Bank Record_2025.05.23对应的那一行记录在EW_AR_2025.03_result.xlsx的excel表的incorrect sheet中,若表格存在， 则覆盖写入， 若不存在， 则新建再写入
-9. 同様操作， 作用在EW_AP_2025.04, EW_AR_2025.04这两个表格中， 结果报存在EW_AP_2025.04_result.xlsx， EW_AR_2025.04_result.xlsx两个表格中,若表格存在， 则覆盖写入， 若不存在， 则新建再写入。若数据中出现负值， 则一律使用绝对值进行比较
-10.若比较多数据中出现负值， 则一律使用绝对值进行比较。 如果处理的数据是非数值型的， 直接排除掉， 无需比较
+1. 有五个excel表格， 分别叫A Bank Record_2025.05.23, EW_AP_2025.03 , EW_AR_2025.03, EW_AP_2025.04, EW_AR_2025.04
+
+2. 在A Bank Record_2025.05.23的excel表中有各个月份的sheet， 名字格式叫2025.03， 2025.04， 以此类推
+
+3. 在EW_AP_2025.03 , EW_AR_2025.03, EW_AP_2025.04, EW_AR_2025.04的excel表中有不同的sheet， 使用名为record的sheet中的数据，若数据中出现负值， 则一律使用绝对值进行比较
+
+4. 读取A Bank Record_2025.05.23的2025.03 sheet中的Debit列数据和EW_AP_2025.03 excel表格record sheet中的第6列数据，若数据中出现负值， 则一律使用绝对值进行比较
+
+5. 在读取A Bank Record_2025.05.23的2025.03 sheet中的Debit列数据前， 先判断对应行的Date列数据是否为空值， 如果是空， 则直接跳过， 无需记录。 而Debit列数据为空时， 也直接跳过， 无需记录。 如果"&" 在JE NO列中，则代表Debit列的数据是多个数之和
+
+6. 如果"&" 在A Bank Record_2025.05.23的2025.03 sheet 的JE NO列中，则代表Debit列的数据是多个数之和：
+	a. 用"&" 对JE NO 的数进行分割
+	b. 上一步得到的数据中， 分别以'-'进行分割，得到的数据中， 后一位的数据如果是2位数， 则把原数据的'-'替换成6个0， 如果后一位是三位数的， 则把原数据的'-'替换成5个0
+
+6. 把从两个表格中读取到的两列数据进行一一对比， 对比条件如下：
+	a. 数据对比一律采用绝对值进行比对
+	b. 判断每一个在A Bank Record_2025.05.23中的非空数据是否都存在EW_AP_2025.03 表格的record sheet 第6列中， 若存在， 则把A Bank Record_2025.05.23的那一整行记录在一个新的名为：202503_BankAP_result.xlsx 的excel表的InBankAndAP sheet中，若不存在，则把A Bank Record_2025.05.23的那一整行记录在202503_BankAP_result.xlsx的excel表的InBankonly sheet中。 若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+	c. 判断每一个在EW_AP_2025.03 表格的record sheet 第6列中的数据是否都存在A Bank Record_2025.05.23表格的Debit列中，若存在， 则把EW_AP_2025.03.xlsx那一整行记录在一个新的名为： 202503_APBank_result.xlsx的excel表格的InAPandBank sheet中， 若不存在， 则把EW_AP_2025.03.xlsx那一整行记录在名为： 202503_APBank_result.xlsx的excel表格的InAPonly sheet中。 若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+	d. 把以上产生的两个表格放在名为：202503的文件夹中
+
+7. 接下来需要处理AR和Bank的数据。读取A Bank Record_2025.05.23的2025.03 sheet中的Credit列数据和EW_AR_2025.03 excel表格record sheet中的第7列数据，若数据中出现负值， 则一律使用绝对值进行比较
+
+8. 在读取A Bank Record_2025.05.23的2025.03 sheet中的Credit列数据前， 先判断对应行的Date列数据是否为空值， 如果是空， 则该行直接跳过， 无需记录。 而Credit列数据为空时， 该行也直接跳过， 无需记录
+
+9. 把从两个表格中读取到的两列数据进行一一对比， 对比条件如下：
+	a. 数据对比一律采用绝对值进行比对
+	b. 判断每一个在A Bank Record_2025.05.23中的非空数据是否都存在EW_AR_2025.03 表格的record sheet 第7列中， 若存在， 则把A Bank Record_2025.05.23那一整行记录在一个新的名为：202503_BankAR_result.xlsx 的excel表的InBankAndAR sheet中，若不存在，则把A Bank Record_2025.05.23那一整行记录在202503_BankAR_result.xlsx的excel表的InBankonly sheet中。 若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+	c. 判断每一个在EW_AR_2025.03 表格的record sheet 第7列中的数据是否都存在A Bank Record_2025.05.23表格的Credit列中，若存在， 则把EW_AR_2025.03.xlsx那一整行记录在一个新的名为： 202503_ARBank_result.xlsx的excel表格的InBankAndAR sheet中， 若不存在， 则把EW_AR_2025.03.xlsx那一整行记录在名为： 202503_ARBank_result.xlsx的excel表格的InARonly sheet中。 若表格存在， 则覆盖写入， 若不存在， 则新建再写入
+	d. 把以上产生的两个表格放在名为：202503的文件夹中
+10. 同様操作， 作用在EW_AP_2025.04, EW_AR_2025.04这两个表格中， 结果保存在202504_BankAP_result.xlsx， 202504_APBank_result.xlsx, 202504_BankAR_result.xlsx, 202504_ARBank_result.xlsx四个个表格中,若表格存在， 则覆盖写入， 若不存在， 则新建再写入。若数据中出现负值， 则一律使用绝对值进行比较。 表格存放在202504文件夹中
+11.若比较多数据中出现负值， 则一律使用绝对值进行比较。 如果处理的数据是非数值型的， 直接排除掉， 无需比较
+
+
+
+1. 把类似这样数据：34-260， 以‘-’分割， 分割后的第二个数字是三位数的， 则原数据中间的-被替换成5个0后得出一个新的数， 如果是两位数的， 原数据中间的-被替换成6个0， 得出一个新的数
+2. 把类似这样的数据：14-109 & 25-54， 先以“&”分割， 得出的结果， 再按步骤1进行转换， 得出新的数据
+3. 类似这样的数据： 25-31-38；40，42，43，44， 以；，进行分割， 得出的数中， 按以下规则进行重组数据
+	a. 25-31-38 这个数中， 第一个-被6个0替代， 第二个-代表31到38的所有值， 最终得出的数是2500000031至2500000038的所有值
+	b. 把40，42，43，44分别与25进行重组， 中间用6个0填充， 得出2500000040， 以此类推
